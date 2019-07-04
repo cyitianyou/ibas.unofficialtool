@@ -7,7 +7,6 @@ import javax.jws.WebService;
 import org.colorcoding.ibas.bobas.common.*;
 import org.colorcoding.ibas.bobas.cxf.WebServicePath;
 import org.colorcoding.ibas.unofficialtool.repository.*;
-import org.colorcoding.ibas.unofficialtool.bo.example.*;
 
 /**
 * UnofficialTool 数据服务JSON
@@ -15,29 +14,6 @@ import org.colorcoding.ibas.unofficialtool.bo.example.*;
 @WebService
 @WebServicePath("data")
 public class DataService extends BORepositoryUnofficialTool {
-
-    //--------------------------------------------------------------------------------------------//
-    /**
-     * 查询-例子
-     * @param criteria 查询
-     * @param token 口令
-     * @return 操作结果
-     */
-    @WebMethod
-    public OperationResult<Example> fetchExample(@WebParam(name = "criteria") Criteria criteria, @WebParam(name = "token") String token) {
-        return super.fetchExample(criteria, token);
-    }
-
-    /**
-     * 保存-例子
-     * @param bo 对象实例
-     * @param token 口令
-     * @return 操作结果
-     */
-    @WebMethod
-    public OperationResult<Example> saveExample(@WebParam(name = "bo") Example bo, @WebParam(name = "token") String token) {
-        return super.saveExample(bo, token);
-    }
 
     //--------------------------------------------------------------------------------------------//
 

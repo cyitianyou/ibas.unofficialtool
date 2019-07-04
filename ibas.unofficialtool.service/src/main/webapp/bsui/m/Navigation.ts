@@ -6,7 +6,6 @@
  * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
  */
 /// <reference path="../../index.d.ts" />
-/// <reference path="./example/index.ts" />
 namespace unofficialtool {
     export namespace ui {
         /** 视图导航 */
@@ -18,15 +17,6 @@ namespace unofficialtool {
             protected newView(id: string): ibas.IView {
                 let view: ibas.IView = null;
                 switch (id) {
-                    case app.ExampleListApp.APPLICATION_ID:
-                        view = new m.ExampleListView();
-                        break;
-                    case app.ExampleChooseApp.APPLICATION_ID:
-                        view = new m.ExampleChooseView();
-                        break;
-                    case app.ExampleEditApp.APPLICATION_ID:
-                        view = new m.ExampleEditView();
-                        break;
                     default:
                         break;
                 }

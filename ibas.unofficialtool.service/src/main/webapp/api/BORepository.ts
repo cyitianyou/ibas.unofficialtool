@@ -19,16 +19,6 @@ namespace unofficialtool {
              * @param caller 调用者
              */
             download(caller: ibas.IDownloadFileCaller<Blob>): void;
-            /**
-             * 查询 例子
-             * @param fetcher 查询者
-             */
-            fetchExample(fetcher: ibas.IFetchCaller<bo.IExample>): void;
-            /**
-             * 保存 例子
-             * @param saver 保存者
-             */
-            saveExample(saver: ibas.ISaveCaller<bo.IExample>): void;
 
         }
     }

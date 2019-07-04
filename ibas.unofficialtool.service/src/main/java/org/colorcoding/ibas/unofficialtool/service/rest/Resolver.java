@@ -8,7 +8,6 @@ import javax.xml.bind.JAXBException;
 
 import org.colorcoding.ibas.bobas.bo.*;
 import org.colorcoding.ibas.bobas.common.*;
-import org.colorcoding.ibas.unofficialtool.bo.example.*;
 
 /**
  * 序列化解释器
@@ -24,7 +23,6 @@ public class Resolver implements ContextResolver<JAXBContext> {
             if (jaxbContext == null) {
                 jaxbContext = JAXBContext.newInstance(Criteria.class, OperationResult.class
                     , UserFieldProxy.class
-                    , Example.class
                 );
             }
         } catch (JAXBException e) {

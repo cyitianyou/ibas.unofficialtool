@@ -6,7 +6,6 @@
  * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
  */
 /// <reference path="../borep/index.ts" />
-/// <reference path="./example/index.ts" />
 namespace unofficialtool {
     export namespace app {
         /** 属性-导航 */
@@ -27,10 +26,7 @@ namespace unofficialtool {
             /** 初始化 */
             protected registers(): void {
                 // 注册功能
-                this.register(new ExampleFunc());
                 // 注册服务应用
-                this.register(new ExampleChooseServiceMapping());
-                this.register(new ExampleLinkServiceMapping());
                 // 注册常驻应用
 
             }

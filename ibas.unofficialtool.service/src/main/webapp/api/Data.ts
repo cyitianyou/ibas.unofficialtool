@@ -16,8 +16,6 @@ namespace unofficialtool {
     export namespace bo {
         /** 业务仓库名称 */
         export const BO_REPOSITORY_UNOFFICIALTOOL: string = ibas.strings.format(ibas.MODULE_REPOSITORY_NAME_TEMPLATE, CONSOLE_NAME);
-        /** 业务对象编码-例子 */
-        export const BO_CODE_EXAMPLE: string = "AVA_UT_EXAMPLE";
     }
 
     export namespace app {

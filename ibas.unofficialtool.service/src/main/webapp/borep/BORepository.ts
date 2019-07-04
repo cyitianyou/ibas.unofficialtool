@@ -37,20 +37,6 @@ namespace unofficialtool {
                 fileRepository.converter = this.createConverter();
                 fileRepository.download("download", caller);
             }
-            /**
-             * 查询 例子
-             * @param fetcher 查询者
-             */
-            fetchExample(fetcher: ibas.IFetchCaller<bo.Example>): void {
-                super.fetch(bo.Example.name, fetcher);
-            }
-            /**
-             * 保存 例子
-             * @param saver 保存者
-             */
-            saveExample(saver: ibas.ISaveCaller<bo.Example>): void {
-                super.save(bo.Example.name, saver);
-            }
 
         }
     }
