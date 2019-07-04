@@ -1,0 +1,10 @@
+{
+  "unofficialtool": "${Domain.getDescription()}",
+  "unofficialtool_icon": "",
+  "unofficialtool_func_example": "例子",
+  "unofficialtool_app_example_list": "例子列表",
+  "unofficialtool_app_example_choose": "例子选择",
+  "unofficialtool_app_example_view": "例子查看",
+  "unofficialtool_app_example_edit": "例子编辑",
+  "unofficialtool_closing_delimiter": "----结束----"
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE ApplicationModule>
+<ns:ApplicationModule xmlns:ns="http://colorcoding.org/ibas/initialfantasy/bo">
+    <Activated>YES</Activated>
+    <ModuleId>0732b9f9-6e52-4b5f-bc41-3ce0f4172aa6</ModuleId>
+    <ModuleName>UnofficialTool</ModuleName>
+    <PlatformId>COMBINATION</PlatformId>
+</ns:ApplicationModule>
