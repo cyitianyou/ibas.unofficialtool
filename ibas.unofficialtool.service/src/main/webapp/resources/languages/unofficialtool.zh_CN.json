@@ -1,6 +1,6 @@
 {
-  "unofficialtool": "${Domain.getDescription()}",
-  "unofficialtool_icon": "",
+  "unofficialtool": "三方工具包",
+  "unofficialtool_icon": "sap-icon://key-user-settings",
   "unofficialtool_func_example": "例子",
   "unofficialtool_app_example_list": "例子列表",
   "unofficialtool_app_example_choose": "例子选择",

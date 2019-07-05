@@ -19,6 +19,9 @@ namespace unofficialtool {
     }
 
     export namespace app {
+        /** 远程配置服务代理 */
+        export class RemoteConfigServiceProxy extends ibas.ServiceProxy<ibas.IServiceContract> {
 
+        }
     }
 }

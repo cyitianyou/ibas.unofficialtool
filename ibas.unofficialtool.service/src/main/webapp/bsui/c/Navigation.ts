@@ -6,6 +6,7 @@
  * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
  */
 /// <reference path="../../index.d.ts" />
+/// <reference path="./RemoteConfigView.ts" />
 namespace unofficialtool {
     export namespace ui {
         /** 视图导航 */
@@ -17,6 +18,9 @@ namespace unofficialtool {
             protected newView(id: string): ibas.IView {
                 let view: ibas.IView = null;
                 switch (id) {
+                    case app.RemoteConfigService.APPLICATION_ID:
+                        view = new c.RemoteConfigView();
+                        break;
                     default:
                         break;
                 }
