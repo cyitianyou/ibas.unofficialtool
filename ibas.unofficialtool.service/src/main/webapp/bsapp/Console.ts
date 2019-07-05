@@ -6,6 +6,8 @@
  * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
  */
 /// <reference path="../borep/index.ts" />
+/// <reference path="./RemoteConfigService.ts" />
+/// <reference path="./BOFactory.ts" />
 namespace unofficialtool {
     export namespace app {
         /** 属性-导航 */
@@ -27,6 +29,7 @@ namespace unofficialtool {
             protected registers(): void {
                 // 注册功能
                 // 注册服务应用
+                this.register(new RemoteConfigServiceMapping());
                 // 注册常驻应用
 
             }
