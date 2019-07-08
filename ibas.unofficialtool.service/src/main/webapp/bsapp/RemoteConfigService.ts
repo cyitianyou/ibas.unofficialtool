@@ -40,13 +40,19 @@ namespace unofficialtool {
                 let that: this = this;
                 try {
                     if (ibas.strings.isEmpty(data.url)) {
-                        throw new Error(ibas.i18n.prop("unofficialtool_msg_config_item_not_null", ibas.i18n.prop("unofficialtool_ui_config_url")));
+                        throw new Error(ibas.i18n.prop("unofficialtool_msg_config_item_not_null",
+                            ibas.i18n.prop("unofficialtool_ui_config_url"))
+                        );
                     }
                     if (ibas.strings.isEmpty(data.userName)) {
-                        throw new Error(ibas.i18n.prop("unofficialtool_msg_config_item_not_null", ibas.i18n.prop("unofficialtool_ui_config_username")));
+                        throw new Error(ibas.i18n.prop("unofficialtool_msg_config_item_not_null",
+                            ibas.i18n.prop("unofficialtool_ui_config_username"))
+                        );
                     }
                     if (ibas.strings.isEmpty(data.password)) {
-                        throw new Error(ibas.i18n.prop("unofficialtool_msg_config_item_not_null", ibas.i18n.prop("unofficialtool_ui_config_password")));
+                        throw new Error(ibas.i18n.prop("unofficialtool_msg_config_item_not_null",
+                            ibas.i18n.prop("unofficialtool_ui_config_password"))
+                        );
                     }
                     this.busy(true);
                     if (!data.url.endsWith("/")) {

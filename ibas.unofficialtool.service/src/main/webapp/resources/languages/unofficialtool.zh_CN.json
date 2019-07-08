@@ -1,11 +1,11 @@
 {
-  "unofficialtool": "三方工具包",
-  "unofficialtool_icon": "sap-icon://key-user-settings",
-  "unofficialtool_app_remoteconfig": "设置远程地址",
-  "unofficialtool_ui_config_url": "远程地址",
-  "unofficialtool_ui_config_username": "用户名",
-  "unofficialtool_ui_config_password": "密码",
-  "unofficialtool_ui_config_token": "口令",
-  "unofficialtool_msg_config_item_not_null": "{0} 不能为空",
-  "unofficialtool_closing_delimiter": "----结束----"
+    "unofficialtool": "三方工具包",
+    "unofficialtool_icon": "sap-icon://key-user-settings",
+    "unofficialtool_app_remoteconfig": "设置远程地址",
+    "unofficialtool_ui_config_url": "远程地址",
+    "unofficialtool_ui_config_username": "用户名",
+    "unofficialtool_ui_config_password": "密码",
+    "unofficialtool_ui_config_token": "口令",
+    "unofficialtool_msg_config_item_not_null": "{0} 不能为空",
+    "unofficialtool_closing_delimiter": "----结束----"
 }
