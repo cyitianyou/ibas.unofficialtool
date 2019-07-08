@@ -29,6 +29,12 @@ namespace unofficialtool {
                 }
                 return null;
             }
+            /** 测试远程配置 */
+            public testConfig(caller: IUserConnectCaller): void {
+                let boRepository: shell.bo.IBORepositoryConnect = ibas.boFactory.create(shell.bo.BO_REPOSITORY_CONNECT);
+                boRepository.address = this.toUrl(boRepository.address, caller.url);
+                boRepository.userConnect(caller);
+            }
             /** 本地仓库地址转换为远程系统仓库地址 */
             protected toUrl(boRepositoryAddress: string, remoteAddress: string): string {
                 let boRepository: bo.BORepositoryUnofficialTool = new bo.BORepositoryUnofficialTool();
@@ -38,6 +44,11 @@ namespace unofficialtool {
                 }
                 return boRepositoryAddress.replace(startPart, remoteAddress);
             }
+        }
+        /** 用户密码登录调用者 */
+        export interface IUserConnectCaller extends shell.bo.IUserConnectCaller {
+            /** 服务器地址 */
+            url: string;
         }
         export const bOFactory: BOFactory = new BOFactory();
     }

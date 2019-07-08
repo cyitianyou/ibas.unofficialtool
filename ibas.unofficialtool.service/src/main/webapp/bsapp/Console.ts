@@ -28,6 +28,7 @@ namespace unofficialtool {
             /** 初始化 */
             protected registers(): void {
                 // 注册功能
+                this.register(new RemoteConfigFunc());
                 // 注册服务应用
                 this.register(new RemoteConfigServiceMapping());
                 // 注册常驻应用
