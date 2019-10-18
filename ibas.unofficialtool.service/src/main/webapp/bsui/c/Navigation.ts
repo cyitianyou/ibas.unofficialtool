@@ -7,6 +7,7 @@
  */
 /// <reference path="../../index.d.ts" />
 /// <reference path="./RemoteConfigView.ts" />
+/// <reference path="./PrivilegeConfigView.ts" />
 namespace unofficialtool {
     export namespace ui {
         /** 视图导航 */
@@ -20,6 +21,9 @@ namespace unofficialtool {
                 switch (id) {
                     case app.RemoteConfigService.APPLICATION_ID:
                         view = new c.RemoteConfigView();
+                        break;
+                    case app.PrivilegeConfigApp.APPLICATION_ID:
+                        view = new c.PrivilegeConfigView();
                         break;
                     default:
                         break;

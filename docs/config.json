@@ -1,0 +1,23 @@
+{
+  "appSettings": {
+    "company": "AVA",
+    "debug": false,
+    "offline": true,
+	"offline|BORepositoryShell": true,
+    "application": "智能业务应用系统",
+    "copyright": "© 2016-2019 Color-Coding Studio",
+    "helpUrl": "https://ibas.colorcoding.org/help",
+    "welcomeUrl": "https://ibas.colorcoding.org/welcome",
+    "welcomeImage": "sap-icon://hello-world",
+    "defalutServiceIcon": "sap-icon://e-care",
+    "defalutModuleIcon": "sap-icon://nutrition-activity",
+    "fullScreen|TABLET": true,
+    "queryPanelConfigurable|TABLET": false,
+    "queryPanelSelectable|TABLET": false,
+    "disableReportFunctions": true,
+    "defaultUser": "admin",
+    "defaultPassword": "1q2w3e",
+	"repositoryAddress|BORepositoryShell": ".../initialfantasy/services/rest/data",
+	"repositoryAddress|BORepositoryShellOffline": ".../repository"
+  }
+}

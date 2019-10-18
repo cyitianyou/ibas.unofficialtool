@@ -50,3 +50,9 @@ FOR %%l IN (%TS_CONFIGS%) DO (
   echo --¿ªÊ¼±àÒë£º!TS_CONFIG!
   call !COMMOND! -p !TS_CONFIG!
 )
+if exist "%WORK_FOLDER%..\..\..\..\docs\unofficialtool" rd /s /q "%WORK_FOLDER%..\..\..\..\docs\unofficialtool"
+mkdir "%WORK_FOLDER%..\..\..\..\docs\unofficialtool"
+mkdir "%WORK_FOLDER%..\..\..\..\docs\unofficialtool\resources"
+copy /y "%WORK_FOLDER%index.js" "%WORK_FOLDER%..\..\..\..\docs\unofficialtool"
+copy /y "%WORK_FOLDER%index.ui.c.js" "%WORK_FOLDER%..\..\..\..\docs\unofficialtool"
+xcopy "%WORK_FOLDER%\resources\*.*" "%WORK_FOLDER%..\..\..\..\docs\unofficialtool\resources\" /s/y

@@ -31,6 +31,11 @@ namespace unofficialtool {
             }
             /** 测试远程配置 */
             public testConfig(caller: IUserConnectCaller): void {
+                ibas.config.set(ibas.CONFIG_ITEM_OFFLINE_MODE, false);
+                let boRepositoryShell: Function = shell.bo.repository.create().constructor;
+                ibas.config.set(ibas.strings.format(ibas.CONFIG_ITEM_TEMPLATE_OFFLINE_MODE, boRepositoryShell.name), false);
+                shell.bo.boFactory.register(shell.bo.BO_REPOSITORY_CONNECT, boRepositoryShell);
+                shell.bo.boFactory.register(shell.bo.BO_REPOSITORY_SHELL, boRepositoryShell);
                 let boRepository: shell.bo.IBORepositoryConnect = ibas.boFactory.create(shell.bo.BO_REPOSITORY_CONNECT);
                 boRepository.address = this.toUrl(boRepository.address, caller.url);
                 boRepository.userConnect(caller);

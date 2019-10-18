@@ -8,6 +8,7 @@
 /// <reference path="../borep/index.ts" />
 /// <reference path="./RemoteConfigService.ts" />
 /// <reference path="./BOFactory.ts" />
+/// <reference path="./PrivilegeConfigApp.ts" />
 namespace unofficialtool {
     export namespace app {
         /** 属性-导航 */
@@ -29,6 +30,7 @@ namespace unofficialtool {
             protected registers(): void {
                 // 注册功能
                 this.register(new RemoteConfigFunc());
+                this.register(new PrivilegeFunc());
                 // 注册服务应用
                 this.register(new RemoteConfigServiceMapping());
                 // 注册常驻应用
