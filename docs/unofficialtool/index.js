@@ -195,6 +195,14 @@ var unofficialtool;
             viewShowed() {
                 // 视图加载完成
                 this.view.showConfig();
+                if (document.location.host === "demo.iok.la") {
+                    this.config({
+                        url: "https://cyitianyou.iok.la/",
+                        userName: "admin",
+                        password: "1q2w3e",
+                        token: ""
+                    });
+                }
             }
             /** 设置 */
             config(data) {
@@ -864,10 +872,249 @@ var unofficialtool;
  * Use of this source code is governed by an Apache License, Version 2.0
  * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
  */
+var unofficialtool;
+(function (unofficialtool) {
+    let app;
+    (function (app_2) {
+        /** 编辑应用-导出模板 */
+        class ExportTemplateEditApp extends ibas.BOEditApplication {
+            /** 构造函数 */
+            constructor() {
+                super();
+                this.id = ExportTemplateEditApp.APPLICATION_ID;
+                this.name = ExportTemplateEditApp.APPLICATION_NAME;
+                this.boCode = ExportTemplateEditApp.BUSINESS_OBJECT_CODE;
+                this.description = ibas.i18n.prop(this.name);
+                if (!ibas.strings.isEmpty(ibas.config.get(app_2.CONFIG_ITEM_REMOTE_SYSTEM_URL, ""))) {
+                    this.description = ibas.strings.format("{0}({1})", this.description, ibas.config.get(app_2.CONFIG_ITEM_REMOTE_SYSTEM_URL, ""));
+                }
+            }
+            /** 注册视图 */
+            registerView() {
+                super.registerView();
+                // 其他事件
+                this.view.chooseBusinessObjectEvent = this.chooseBusinessObject;
+            }
+            /** 视图显示后 */
+            viewShowed() {
+                // 视图加载完成
+                super.viewShowed();
+                if (ibas.objects.isNull(this.editData)) {
+                    // 创建编辑对象实例
+                    this.editData = new importexport.bo.ExportTemplate();
+                    this.proceeding(ibas.emMessageType.WARNING, ibas.i18n.prop("shell_data_created_new"));
+                }
+                this.view.showExportTemplate(this.editData);
+            }
+            run() {
+                let that = this;
+                if (ibas.objects.instanceOf(arguments[0], importexport.bo.ExportTemplate)) {
+                    let data = arguments[0];
+                    // 新对象直接编辑
+                    if (data.isNew) {
+                        that.editData = data;
+                        that.show();
+                        return;
+                    }
+                    // 尝试重新查询编辑对象
+                    let criteria = data.criteria();
+                    if (!ibas.objects.isNull(criteria) && criteria.conditions.length > 0) {
+                        // 有效的查询对象查询
+                        let boRepository = new importexport.bo.BORepositoryImportExport();
+                        boRepository.fetchExportTemplate({
+                            criteria: criteria,
+                            onCompleted(opRslt) {
+                                let data;
+                                if (opRslt.resultCode === 0) {
+                                    data = opRslt.resultObjects.firstOrDefault();
+                                }
+                                if (ibas.objects.instanceOf(data, importexport.bo.ExportTemplate)) {
+                                    // 查询到了有效数据
+                                    that.editData = data;
+                                    that.show();
+                                }
+                                else {
+                                    // 数据重新检索无效
+                                    that.messages({
+                                        type: ibas.emMessageType.WARNING,
+                                        message: ibas.i18n.prop("shell_data_deleted_and_created"),
+                                        onCompleted() {
+                                            that.show();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                        return; // 退出
+                    }
+                }
+                super.run.apply(this, arguments);
+            }
+            /** 保存数据 */
+            saveData() {
+                this.busy(true);
+                let that = this;
+                let boRepository = new importexport.bo.BORepositoryImportExport();
+                boRepository.saveExportTemplate({
+                    beSaved: this.editData,
+                    onCompleted(opRslt) {
+                        try {
+                            that.busy(false);
+                            if (opRslt.resultCode !== 0) {
+                                throw new Error(opRslt.message);
+                            }
+                            if (opRslt.resultObjects.length === 0) {
+                                // 删除成功，释放当前对象
+                                that.messages(ibas.emMessageType.SUCCESS, ibas.i18n.prop("shell_data_delete") + ibas.i18n.prop("shell_sucessful"));
+                                that.editData = undefined;
+                            }
+                            else {
+                                // 替换编辑对象
+                                that.editData = opRslt.resultObjects.firstOrDefault();
+                                that.messages(ibas.emMessageType.SUCCESS, ibas.i18n.prop("shell_data_save") + ibas.i18n.prop("shell_sucessful"));
+                            }
+                            // 刷新当前视图
+                            that.viewShowed();
+                        }
+                        catch (error) {
+                            that.messages(error);
+                        }
+                    }
+                });
+                this.proceeding(ibas.emMessageType.INFORMATION, ibas.i18n.prop("shell_saving_data"));
+            }
+            /** 删除数据 */
+            deleteData() {
+                let that = this;
+                this.messages({
+                    type: ibas.emMessageType.QUESTION,
+                    title: ibas.i18n.prop(this.name),
+                    message: ibas.i18n.prop("shell_delete_continue"),
+                    actions: [ibas.emMessageAction.YES, ibas.emMessageAction.NO],
+                    onCompleted(action) {
+                        if (action === ibas.emMessageAction.YES) {
+                            that.editData.delete();
+                            that.saveData();
+                        }
+                    }
+                });
+            }
+            /** 新建数据，参数1：是否克隆 */
+            createData(clone) {
+                let that = this;
+                let createData = function () {
+                    if (clone) {
+                        // 克隆对象
+                        that.editData = that.editData.clone();
+                        that.proceeding(ibas.emMessageType.WARNING, ibas.i18n.prop("shell_data_cloned_new"));
+                        that.viewShowed();
+                    }
+                    else {
+                        // 新建对象
+                        that.editData = new importexport.bo.ExportTemplate();
+                        that.proceeding(ibas.emMessageType.WARNING, ibas.i18n.prop("shell_data_created_new"));
+                        that.viewShowed();
+                    }
+                };
+                if (that.editData.isDirty) {
+                    this.messages({
+                        type: ibas.emMessageType.QUESTION,
+                        title: ibas.i18n.prop(this.name),
+                        message: ibas.i18n.prop("shell_data_not_saved_continue"),
+                        actions: [ibas.emMessageAction.YES, ibas.emMessageAction.NO],
+                        onCompleted(action) {
+                            if (action === ibas.emMessageAction.YES) {
+                                createData();
+                            }
+                        }
+                    });
+                }
+                else {
+                    createData();
+                }
+            }
+            /** 选择业务对象事件 */
+            chooseBusinessObject(callback) {
+                let that = this;
+                let criteria = new ibas.Criteria();
+                criteria.noChilds = true;
+                let condition = criteria.conditions.create();
+                condition.alias = "Code";
+                condition.value = ".";
+                condition.operation = ibas.emConditionOperation.NOT_CONTAIN;
+                ibas.servicesManager.runChooseService({
+                    boCode: initialfantasy.bo.BO_CODE_BOINFORMATION,
+                    chooseType: ibas.emChooseType.SINGLE,
+                    criteria: criteria,
+                    onCompleted(selecteds) {
+                        let selected = selecteds.firstOrDefault();
+                        callback(selected.code, selected.description);
+                    }
+                });
+            }
+        }
+        /** 应用标识 */
+        ExportTemplateEditApp.APPLICATION_ID = "999a6a5e-c002-472b-8ff8-a37c6c2db6e7";
+        /** 应用名称 */
+        ExportTemplateEditApp.APPLICATION_NAME = "unofficialtool_app_exporttemplate_edit";
+        /** 业务对象编码 */
+        ExportTemplateEditApp.BUSINESS_OBJECT_CODE = importexport.bo.ExportTemplate.BUSINESS_OBJECT_CODE;
+        app_2.ExportTemplateEditApp = ExportTemplateEditApp;
+        class ExportTemplateFunc extends ibas.ModuleFunction {
+            /** 构造函数 */
+            constructor() {
+                super();
+                this.id = ExportTemplateFunc.FUNCTION_ID;
+                this.name = ExportTemplateFunc.FUNCTION_NAME;
+                this.description = ibas.i18n.prop(this.name);
+            }
+            /** 默认功能 */
+            default() {
+                if (!ibas.objects.isNull(app_2.bOFactory.createRepository(unofficialtool.bo.BO_REPOSITORY_UNOFFICIALTOOL))) {
+                    let app = new importexport.app.ExportTemplateListApp();
+                    app.navigation = this.navigation;
+                    app.newData = function () {
+                        let app = new ExportTemplateEditApp();
+                        app.navigation = this.navigation;
+                        app.viewShower = this.viewShower;
+                        app.run();
+                    };
+                    app.editData = function (data) {
+                        // 检查目标数据
+                        if (ibas.objects.isNull(data)) {
+                            this.messages(ibas.emMessageType.WARNING, ibas.i18n.prop("shell_please_chooose_data", ibas.i18n.prop("shell_data_edit")));
+                            return;
+                        }
+                        let app = new ExportTemplateEditApp();
+                        app.navigation = this.navigation;
+                        app.viewShower = this.viewShower;
+                        app.run(data);
+                    };
+                    app.description = ibas.strings.format("{0}({1})", ibas.i18n.prop("unofficialtool_app_exporttemplate_list"), ibas.config.get(app_2.CONFIG_ITEM_REMOTE_SYSTEM_URL, ""));
+                    return app;
+                }
+                return null;
+            }
+        }
+        /** 功能标识 */
+        ExportTemplateFunc.FUNCTION_ID = "86024fe1-b84d-4402-9da6-492b68376d69";
+        /** 功能名称 */
+        ExportTemplateFunc.FUNCTION_NAME = "unofficialtool_func_exporttemplate";
+        app_2.ExportTemplateFunc = ExportTemplateFunc;
+    })(app = unofficialtool.app || (unofficialtool.app = {}));
+})(unofficialtool || (unofficialtool = {}));
+/**
+ * @license
+ * Copyright Color-Coding Studio. All Rights Reserved.
+ *
+ * Use of this source code is governed by an Apache License, Version 2.0
+ * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
+ */
 /// <reference path="../borep/index.ts" />
 /// <reference path="./RemoteConfigService.ts" />
 /// <reference path="./BOFactory.ts" />
 /// <reference path="./PrivilegeConfigApp.ts" />
+/// <reference path="./ExportTemplateEditApp.ts" />
 var unofficialtool;
 (function (unofficialtool) {
     let app;
@@ -891,7 +1138,7 @@ var unofficialtool;
             registers() {
                 // 注册功能
                 this.register(new app.RemoteConfigFunc());
-                this.register(new app.PrivilegeFunc());
+                this.register(new app.ExportTemplateFunc());
                 // 注册服务应用
                 this.register(new app.RemoteConfigServiceMapping());
                 // 注册常驻应用

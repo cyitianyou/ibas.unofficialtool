@@ -55,4 +55,5 @@ mkdir "%WORK_FOLDER%..\..\..\..\docs\unofficialtool"
 mkdir "%WORK_FOLDER%..\..\..\..\docs\unofficialtool\resources"
 copy /y "%WORK_FOLDER%index.js" "%WORK_FOLDER%..\..\..\..\docs\unofficialtool"
 copy /y "%WORK_FOLDER%index.ui.c.js" "%WORK_FOLDER%..\..\..\..\docs\unofficialtool"
+xcopy "%WORK_FOLDER%\3rdparty\reportbro\*.*" "%WORK_FOLDER%..\..\..\..\docs\unofficialtool\3rdparty\reportbro\" /s/y
 xcopy "%WORK_FOLDER%\resources\*.*" "%WORK_FOLDER%..\..\..\..\docs\unofficialtool\resources\" /s/y

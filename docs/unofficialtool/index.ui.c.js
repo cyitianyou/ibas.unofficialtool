@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 /**
  * @license
  * Copyright Color-Coding Studio. All Rights Reserved.
@@ -675,15 +684,699 @@ var unofficialtool;
  * Copyright Color-Coding Studio. All Rights Reserved.
  *
  * Use of this source code is governed by an Apache License, Version 2.0
+ * that can be found in the LICENSE file at http?://www.apache.org/licenses/LICENSE-2.0
+ */
+var unofficialtool;
+(function (unofficialtool) {
+    let ui;
+    (function (ui) {
+        let c;
+        (function (c_2) {
+            class Utils {
+                static convertToReport(data) {
+                    return __awaiter(this, void 0, void 0, function* () {
+                        let report = {
+                            docElements: [],
+                            version: 2,
+                            parameters: yield Utils.convertToParameters(data.boCode),
+                            styles: []
+                        };
+                        // #region documentProperties
+                        let documentProperties = {
+                            orientation: "portrait",
+                            pageFormat: "user_defined",
+                            unit: "px"
+                        };
+                        documentProperties.boCode = data.boCode || "";
+                        documentProperties.name = data.name || "";
+                        documentProperties.pageWidth = (data.width || 0) + "";
+                        documentProperties.pageHeight = (data.height || 0) + "";
+                        documentProperties.marginLeft = (data.marginLeft || 0) + "";
+                        documentProperties.marginRight = (data.marginRight || 0) + "";
+                        documentProperties.marginTop = (data.marginTop || 0) + (data.pageHeaderTop || 0) + "";
+                        documentProperties.marginBottom = (data.marginBottom || 0) + "";
+                        documentProperties.pageHeaderSize = (data.pageHeaderHeight || 0) + "";
+                        documentProperties.startSectionSize = (data.startSectionHeight || 0) + "";
+                        documentProperties.repetitionSize = (data.repetitionHeaderHeight || 0) + (data.repetitionHeight || 0)
+                            + (data.repetitionFooterHeight || 0) + "";
+                        documentProperties.endSectionSize = (data.endSectionHeight || 0) + "";
+                        documentProperties.pageFooterSize = (data.pageFooterHeight || 0) + "";
+                        report.documentProperties = documentProperties;
+                        // #endregion
+                        Utils.elementId = 1;
+                        for (let item of data.pageHeaders.filterDeleted()) {
+                            let docElement = {
+                                id: Utils.elementId++,
+                                containerId: "0_page_header"
+                            };
+                            Utils.convertToDocElement(docElement, item);
+                            report.docElements.push(docElement);
+                        }
+                        for (let item of data.startSections.filterDeleted()) {
+                            let docElement = {
+                                id: Utils.elementId++,
+                                containerId: "0_start_section"
+                            };
+                            Utils.convertToDocElement(docElement, item);
+                            report.docElements.push(docElement);
+                        }
+                        let tableElement = {
+                            id: Utils.elementId++,
+                            elementType: "table",
+                            columns: data.repetitionHeaders.length + "",
+                            contentDataRows: [],
+                            header: true,
+                            footer: false,
+                            x: (data.repetitionLeft || 0) - (data.marginLeft || 0),
+                            containerId: "0_repetition"
+                        };
+                        Utils.convertToTableElement(tableElement, data);
+                        report.docElements.push(tableElement);
+                        for (let item of data.endSections.filterDeleted()) {
+                            let docElement = {
+                                id: Utils.elementId++,
+                                containerId: "0_end_section"
+                            };
+                            Utils.convertToDocElement(docElement, item);
+                            report.docElements.push(docElement);
+                        }
+                        for (let item of data.pageFooters.filterDeleted()) {
+                            let docElement = {
+                                id: Utils.elementId++,
+                                containerId: "0_page_footer"
+                            };
+                            Utils.convertToDocElement(docElement, item);
+                            report.docElements.push(docElement);
+                        }
+                        return report;
+                    });
+                }
+                static convertToTableElement(tableElement, data) {
+                    let header = {
+                        id: Utils.elementId++,
+                        height: data.repetitionHeaderHeight || 0,
+                        elementType: "none",
+                        columnData: []
+                    };
+                    for (let item of data.repetitionHeaders.filterDeleted()) {
+                        let docElement = {
+                            id: Utils.elementId++,
+                        };
+                        Utils.convertToDocElement(docElement, item);
+                        docElement.height = data.repetitionHeaderHeight || 0;
+                        header.columnData.push(docElement);
+                    }
+                    tableElement.headerData = header;
+                    let contentDataRow = {
+                        id: Utils.elementId++,
+                        height: data.repetitionHeight || 0,
+                        elementType: "none",
+                        columnData: []
+                    };
+                    for (let item of data.repetitions.filterDeleted()) {
+                        let docElement = {
+                            id: Utils.elementId++,
+                        };
+                        Utils.convertToDocElement(docElement, item);
+                        docElement.height = data.repetitionHeight || 0;
+                        contentDataRow.columnData.push(docElement);
+                    }
+                    tableElement.contentDataRows.push(contentDataRow);
+                    if (data.repetitionFooters.filterDeleted().length > 0) {
+                        tableElement.footer = true;
+                    }
+                    let footer = {
+                        id: Utils.elementId++,
+                        height: data.repetitionFooterHeight || 0,
+                        elementType: "none",
+                        columnData: []
+                    };
+                    for (let item of data.repetitionFooters.filterDeleted()) {
+                        let docElement = {
+                            id: Utils.elementId++,
+                        };
+                        Utils.convertToDocElement(docElement, item);
+                        docElement.height = data.repetitionFooterHeight || 0;
+                        footer.columnData.push(docElement);
+                    }
+                    for (let i = 0; i < data.repetitionHeaders.length - data.repetitionFooters.length; i++) {
+                        let docElement = {
+                            id: Utils.elementId++,
+                            elementType: "table_text",
+                            height: data.repetitionFooterHeight || 0
+                        };
+                        footer.columnData.push(docElement);
+                    }
+                    tableElement.footerData = footer;
+                }
+                static convertToDocElement(docElement, item) {
+                    docElement.width = item.itemWidth || 0;
+                    if (docElement.width <= 0 && !!item.itemString) {
+                        docElement.width = item.itemString.length * (item.fontSize || 0);
+                    }
+                    docElement.height = item.itemHeight || 0;
+                    docElement.x = item.itemLeft || 0;
+                    docElement.y = item.itemTop || 0;
+                    if (item.itemType === "IMG") {
+                        docElement.elementType = "image";
+                        let textElement = docElement;
+                        textElement.sourceType = ibas.enums.toString(importexport.bo.emDataSourceType, item.sourceType);
+                        textElement.content = item.itemString || "";
+                        textElement.format = item.valueFormat || "";
+                    }
+                    else {
+                        if (!docElement.containerId) {
+                            docElement.elementType = "table_text";
+                        }
+                        else {
+                            docElement.elementType = "text";
+                        }
+                        let textElement = docElement;
+                        textElement.sourceType = ibas.enums.toString(importexport.bo.emDataSourceType, item.sourceType);
+                        textElement.content = item.itemString || "";
+                        textElement.format = item.valueFormat || "";
+                        textElement.font = item.fontName || "Arial";
+                        textElement.fontSize = item.fontSize || 12;
+                        textElement.horizontalAlignment = ibas.enums.toString(importexport.bo.emJustificationHorizontal, item.justificationHorizontal).toLowerCase();
+                        textElement.bold = false;
+                        textElement.italic = false;
+                        switch (item.textStyle) {
+                            case importexport.bo.emTextStyle.REGULAR:
+                                break;
+                            case importexport.bo.emTextStyle.BOLD:
+                                textElement.bold = true;
+                                break;
+                            case importexport.bo.emTextStyle.ITALIC:
+                                textElement.italic = true;
+                                break;
+                            case importexport.bo.emTextStyle.BOLD_ITALIC:
+                                textElement.bold = true;
+                                textElement.italic = true;
+                                break;
+                        }
+                    }
+                }
+                static convertToParameters(boCode) {
+                    return __awaiter(this, void 0, void 0, function* () {
+                        let promise = new Promise(resolve => {
+                            let parameters = [
+                                {
+                                    name: "PAGE_INDEX",
+                                    description: "当前页码",
+                                    showOnlyNameType: true,
+                                    arrayItemType: "string",
+                                    eval: false,
+                                    expression: "",
+                                    id: Utils.elementId++,
+                                    nullable: false,
+                                    pattern: "",
+                                    testData: "1",
+                                    type: "number",
+                                },
+                                {
+                                    name: "PAGE_TOTAL",
+                                    description: "总页码",
+                                    showOnlyNameType: true,
+                                    arrayItemType: "string",
+                                    eval: false,
+                                    expression: "",
+                                    id: Utils.elementId++,
+                                    nullable: false,
+                                    pattern: "",
+                                    testData: "1",
+                                    type: "number",
+                                },
+                                {
+                                    name: "DATA_SIZE",
+                                    description: "当前行",
+                                    showOnlyNameType: true,
+                                    arrayItemType: "string",
+                                    eval: false,
+                                    expression: "",
+                                    id: Utils.elementId++,
+                                    nullable: false,
+                                    pattern: "",
+                                    testData: "1",
+                                    type: "number",
+                                },
+                                {
+                                    name: "DATA_INDEX",
+                                    description: "总行数",
+                                    showOnlyNameType: true,
+                                    arrayItemType: "string",
+                                    eval: false,
+                                    expression: "",
+                                    id: Utils.elementId++,
+                                    nullable: false,
+                                    pattern: "",
+                                    testData: "1",
+                                    type: "number",
+                                },
+                                {
+                                    name: "TIME_NOW",
+                                    description: "当前时间",
+                                    showOnlyNameType: true,
+                                    arrayItemType: "string",
+                                    eval: false,
+                                    expression: "",
+                                    id: Utils.elementId++,
+                                    nullable: false,
+                                    pattern: "",
+                                    testData: "",
+                                    type: "number",
+                                },
+                            ];
+                            if (ibas.strings.isEmpty(boCode)) {
+                                resolve(parameters);
+                                return;
+                            }
+                            let criteria = new ibas.Criteria();
+                            let condition = criteria.conditions.create();
+                            condition.alias = initialfantasy.bo.BOInformation.PROPERTY_CODE_NAME;
+                            condition.operation = ibas.emConditionOperation.START;
+                            condition.value = boCode;
+                            let sort = criteria.sorts.create();
+                            sort.alias = initialfantasy.bo.BOInformation.PROPERTY_CODE_NAME;
+                            sort.sortType = ibas.emSortType.ASCENDING;
+                            let boRepository = new initialfantasy.bo.BORepositoryInitialFantasy();
+                            boRepository.fetchBOInformation({
+                                criteria: criteria,
+                                onCompleted(opRslt) {
+                                    try {
+                                        if (opRslt.resultCode !== 0) {
+                                            throw new Error(opRslt.message);
+                                        }
+                                        let data = opRslt.resultObjects.firstOrDefault(c => {
+                                            return c.code.indexOf(".") < 0;
+                                        });
+                                        if (!ibas.objects.isNull(data)) {
+                                            let convertToParameter = (data, prefix, parameters) => {
+                                                for (let boPropertyInformation of data.boPropertyInformations) {
+                                                    if (boPropertyInformation.mapped.indexOf(".") < 0) {
+                                                        // 字段
+                                                        let parameter = {
+                                                            name: boPropertyInformation.property,
+                                                            description: boPropertyInformation.description,
+                                                            showOnlyNameType: true,
+                                                            arrayItemType: "string",
+                                                            eval: false,
+                                                            expression: "",
+                                                            id: Utils.elementId++,
+                                                            nullable: false,
+                                                            pattern: "",
+                                                            testData: "",
+                                                            type: "number",
+                                                        };
+                                                        parameters.push(parameter);
+                                                    }
+                                                    else {
+                                                        // 子表
+                                                        let dataItem = opRslt.resultObjects.firstOrDefault(c => {
+                                                            return c.code === boPropertyInformation.mapped;
+                                                        });
+                                                        if (!ibas.objects.isNull(dataItem)) {
+                                                            let parameter = {
+                                                                arrayItemType: "string",
+                                                                children: [],
+                                                                eval: false,
+                                                                expression: "",
+                                                                id: Utils.elementId++,
+                                                                name: boPropertyInformation.property + "[]",
+                                                                description: dataItem.description,
+                                                                nullable: false,
+                                                                pattern: "",
+                                                                showOnlyNameType: false,
+                                                                testData: "",
+                                                                type: "map"
+                                                            };
+                                                            convertToParameter(dataItem, "", parameter.children);
+                                                            parameters.push(parameter);
+                                                        }
+                                                    }
+                                                }
+                                            };
+                                            convertToParameter(data, "", parameters);
+                                            // 主对象
+                                        }
+                                    }
+                                    catch (error) {
+                                    }
+                                    resolve(parameters);
+                                }
+                            });
+                        });
+                        return promise;
+                    });
+                }
+                static convertToExportTemplate(report, data) {
+                    let documentProperties = report.documentProperties;
+                    let tableElement = report.docElements.find(c => {
+                        return c.elementType === "table" && c.containerId === "0_repetition";
+                    });
+                    if (ibas.objects.isNull(tableElement)) {
+                        return false;
+                    }
+                    let headerBand = tableElement.headerData;
+                    let contentBand = tableElement.contentDataRows[0];
+                    let footerBand = tableElement.footerData;
+                    if (ibas.objects.isNull(headerBand) || ibas.objects.isNull(contentBand) || ibas.objects.isNull(footerBand)) {
+                        return false;
+                    }
+                    Utils.resetExportTemplate(data);
+                    data.name = documentProperties.name;
+                    data.boCode = documentProperties.boCode;
+                    data.dpi = 0;
+                    data.marginArea = 0;
+                    data.width = ibas.numbers.valueOf(documentProperties.pageWidth);
+                    data.height = ibas.numbers.valueOf(documentProperties.pageHeight);
+                    data.marginLeft = ibas.numbers.valueOf(documentProperties.marginLeft);
+                    data.marginRight = ibas.numbers.valueOf(documentProperties.marginRight);
+                    data.marginTop = ibas.numbers.valueOf(documentProperties.marginTop);
+                    data.marginBottom = ibas.numbers.valueOf(documentProperties.marginBottom);
+                    data.pageHeaderWidth = data.width - data.marginLeft - data.marginRight;
+                    data.startSectionWidth = data.width - data.marginLeft - data.marginRight;
+                    data.repetitionHeaderWidth = data.width - data.marginLeft - data.marginRight;
+                    data.repetitionWidth = data.width - data.marginLeft - data.marginRight;
+                    data.repetitionFooterWidth = data.width - data.marginLeft - data.marginRight;
+                    data.endSectionWidth = data.width - data.marginLeft - data.marginRight;
+                    data.pageFooterWidth = data.width - data.marginLeft - data.marginRight;
+                    data.pageHeaderHeight = ibas.numbers.valueOf(documentProperties.pageHeaderSize);
+                    data.startSectionHeight = ibas.numbers.valueOf(documentProperties.startSectionSize);
+                    data.repetitionHeaderHeight = ibas.numbers.valueOf(headerBand.height);
+                    data.repetitionHeight = ibas.numbers.valueOf(contentBand.height);
+                    data.repetitionFooterHeight = ibas.numbers.valueOf(footerBand.height);
+                    data.endSectionHeight = ibas.numbers.valueOf(documentProperties.endSectionSize);
+                    data.pageFooterHeight = ibas.numbers.valueOf(documentProperties.pageFooterSize);
+                    data.pageHeaderLeft = data.marginLeft;
+                    data.startSectionLeft = data.marginLeft;
+                    data.repetitionHeaderLeft = data.marginLeft + tableElement.x;
+                    data.repetitionLeft = data.marginLeft + tableElement.x;
+                    data.repetitionFooterLeft = data.marginLeft + tableElement.x;
+                    data.endSectionLeft = data.marginLeft;
+                    data.pageFooterLeft = data.marginLeft;
+                    data.pageHeaderTop = 0;
+                    data.startSectionTop = data.pageHeaderTop + data.pageHeaderHeight;
+                    data.repetitionHeaderTop = data.startSectionTop + data.startSectionHeight;
+                    data.repetitionTop = data.repetitionHeaderTop + data.repetitionHeaderHeight;
+                    data.repetitionFooterTop = data.repetitionTop + data.repetitionHeight;
+                    data.endSectionTop = data.repetitionFooterTop + data.repetitionFooterHeight;
+                    data.pageFooterTop = data.height - data.marginBottom - data.pageFooterWidth;
+                    for (let docElement of report.docElements) {
+                        if (docElement.elementType === "image" || docElement.elementType === "text") {
+                            Utils.convertToExportTemplateItem(docElement, data);
+                        }
+                    }
+                    let x = 0;
+                    for (let tableTextElement of headerBand.columnData) {
+                        tableTextElement.x = x;
+                        Utils.convertToExportTemplateItem(tableTextElement, data, importexport.bo.emAreaType.REPETITION_HEADER);
+                        x += (tableTextElement.width || 0);
+                    }
+                    x = 0;
+                    for (let tableTextElement of contentBand.columnData) {
+                        tableTextElement.x = x;
+                        Utils.convertToExportTemplateItem(tableTextElement, data, importexport.bo.emAreaType.REPETITION);
+                        x += (tableTextElement.width || 0);
+                    }
+                    if (!!tableElement.footer) {
+                        x = 0;
+                        for (let tableTextElement of footerBand.columnData) {
+                            tableTextElement.x = x;
+                            Utils.convertToExportTemplateItem(tableTextElement, data, importexport.bo.emAreaType.REPETITION_FOOTER);
+                            x += (tableTextElement.width || 0);
+                        }
+                    }
+                    return true;
+                }
+                static convertToExportTemplateItem(docElement, data, areaType) {
+                    let item;
+                    switch (docElement.containerId) {
+                        case "0_page_header":
+                            item = data.pageHeaders.create();
+                            break;
+                        case "0_start_section":
+                            item = data.startSections.create();
+                            break;
+                        case "0_end_section":
+                            item = data.endSections.create();
+                            break;
+                        case "0_page_footer":
+                            item = data.pageFooters.create();
+                            break;
+                        default:
+                            if (areaType === importexport.bo.emAreaType.REPETITION_HEADER) {
+                                item = data.repetitionHeaders.create();
+                            }
+                            else if (areaType === importexport.bo.emAreaType.REPETITION) {
+                                item = data.repetitions.create();
+                            }
+                            else if (areaType === importexport.bo.emAreaType.REPETITION_FOOTER) {
+                                item = data.repetitionFooters.create();
+                            }
+                            else {
+                                return;
+                            }
+                    }
+                    item.itemType = docElement.elementType === "image" ? "IMG" : "TEXT";
+                    item.itemVisible = ibas.emYesNo.YES;
+                    item.sourceType = ibas.enums.valueOf(importexport.bo.emDataSourceType, docElement.sourceType);
+                    item.itemString = docElement.content;
+                    item.valueFormat = docElement.format;
+                    item.textStyle = importexport.bo.emTextStyle.REGULAR;
+                    item.itemLeft = docElement.x || 0;
+                    item.itemTop = docElement.y || 0;
+                    item.itemWidth = docElement.width;
+                    item.itemHeight = item.itemHeight || docElement.height;
+                    item.justificationHorizontal = ibas.enums.valueOf(importexport.bo.emJustificationHorizontal, docElement.horizontalAlignment.toUpperCase());
+                    if (docElement.elementType === "image") {
+                        item.itemType = "IMG";
+                    }
+                    else {
+                        item.itemType = "TEXT";
+                        let textElement = docElement;
+                        item.fontName = textElement.font;
+                        item.fontSize = textElement.fontSize;
+                        if (!!textElement.bold && !!textElement.italic) {
+                            item.textStyle = importexport.bo.emTextStyle.BOLD_ITALIC;
+                        }
+                        else if (!!textElement.bold) {
+                            item.textStyle = importexport.bo.emTextStyle.BOLD;
+                        }
+                        else if (!!textElement.italic) {
+                            item.textStyle = importexport.bo.emTextStyle.ITALIC;
+                        }
+                    }
+                }
+                static resetExportTemplate(data) {
+                    for (let item of data.pageHeaders.filterDeleted()) {
+                        if (data.pageHeaders.indexOf(item) >= 0) {
+                            if (item.isNew) {
+                                // 新建的移除集合
+                                data.pageHeaders.remove(item);
+                            }
+                            else {
+                                // 非新建标记删除
+                                item.delete();
+                            }
+                        }
+                    }
+                    for (let item of data.startSections.filterDeleted()) {
+                        if (data.startSections.indexOf(item) >= 0) {
+                            if (item.isNew) {
+                                // 新建的移除集合
+                                data.startSections.remove(item);
+                            }
+                            else {
+                                // 非新建标记删除
+                                item.delete();
+                            }
+                        }
+                    }
+                    for (let item of data.repetitionHeaders.filterDeleted()) {
+                        if (data.repetitionHeaders.indexOf(item) >= 0) {
+                            if (item.isNew) {
+                                // 新建的移除集合
+                                data.repetitionHeaders.remove(item);
+                            }
+                            else {
+                                // 非新建标记删除
+                                item.delete();
+                            }
+                        }
+                    }
+                    for (let item of data.repetitions.filterDeleted()) {
+                        if (data.repetitions.indexOf(item) >= 0) {
+                            if (item.isNew) {
+                                // 新建的移除集合
+                                data.repetitions.remove(item);
+                            }
+                            else {
+                                // 非新建标记删除
+                                item.delete();
+                            }
+                        }
+                    }
+                    for (let item of data.repetitionFooters.filterDeleted()) {
+                        if (data.repetitionFooters.indexOf(item) >= 0) {
+                            if (item.isNew) {
+                                // 新建的移除集合
+                                data.repetitionFooters.remove(item);
+                            }
+                            else {
+                                // 非新建标记删除
+                                item.delete();
+                            }
+                        }
+                    }
+                    for (let item of data.endSections.filterDeleted()) {
+                        if (data.endSections.indexOf(item) >= 0) {
+                            if (item.isNew) {
+                                // 新建的移除集合
+                                data.endSections.remove(item);
+                            }
+                            else {
+                                // 非新建标记删除
+                                item.delete();
+                            }
+                        }
+                    }
+                    for (let item of data.pageFooters.filterDeleted()) {
+                        if (data.pageFooters.indexOf(item) >= 0) {
+                            if (item.isNew) {
+                                // 新建的移除集合
+                                data.pageFooters.remove(item);
+                            }
+                            else {
+                                // 非新建标记删除
+                                item.delete();
+                            }
+                        }
+                    }
+                }
+            }
+            c_2.Utils = Utils;
+        })(c = ui.c || (ui.c = {}));
+    })(ui = unofficialtool.ui || (unofficialtool.ui = {}));
+})(unofficialtool || (unofficialtool = {}));
+/**
+ * @license
+ * Copyright Color-Coding Studio. All Rights Reserved.
+ *
+ * Use of this source code is governed by an Apache License, Version 2.0
+ * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
+ */
+/// <reference path="./3rd.ts" />
+var unofficialtool;
+(function (unofficialtool) {
+    let ui;
+    (function (ui) {
+        let c;
+        (function (c) {
+            /** 编辑视图-导出模板 */
+            class ExportTemplateEditView extends ibas.BOEditView {
+                /** 绘制视图 */
+                draw() {
+                    let that = this;
+                    return this.page = new sap.extension.m.DataPage("", {
+                        showHeader: false,
+                        dataInfo: {
+                            code: importexport.bo.ExportTemplate.BUSINESS_OBJECT_CODE,
+                        },
+                        content: [
+                            new sap.ui.core.HTML("", {
+                                preferDOM: false,
+                                content: "<div class=\"reportbro\"></div>",
+                                afterRendering() {
+                                }
+                            })
+                        ]
+                    });
+                }
+                onDisplayed() {
+                    super.onDisplayed();
+                    let mainPage = sap.ui.getCore().byId("__page0");
+                    if (mainPage instanceof sap.tnt.ToolPage) {
+                        mainPage.setSideExpanded(false);
+                        this.mainHeader = mainPage.getHeader();
+                        this.sideContent = mainPage.getSideContent();
+                        mainPage.setHeader(null);
+                        mainPage.setSideContent(null);
+                    }
+                }
+                onClosed() {
+                    super.onClosed();
+                    let mainPage = sap.ui.getCore().byId("__page0");
+                    if (mainPage instanceof sap.tnt.ToolPage) {
+                        mainPage.setHeader(this.mainHeader);
+                        mainPage.setSideContent(this.sideContent);
+                    }
+                }
+                /** 显示数据 */
+                showExportTemplate(data) {
+                    return __awaiter(this, void 0, void 0, function* () {
+                        let that = this;
+                        let report = yield c.Utils.convertToReport(data);
+                        setTimeout(() => {
+                            $(".reportbro").empty();
+                            $(".reportbro").data("reportBro", null);
+                            $(".reportbro").reportBro({
+                                // 字体
+                                additionalFonts: [
+                                    { name: "Arial", value: "Arial" }
+                                ],
+                                // 选择业务对象
+                                chooseBOCodeEvent(callback) {
+                                    that.fireViewEvents(that.chooseBusinessObjectEvent, (boCode, boDescription) => __awaiter(this, void 0, void 0, function* () {
+                                        let parameters = yield c.Utils.convertToParameters(boCode);
+                                        $(".reportbro").reportBro("reloadParameters", parameters);
+                                        callback(boCode);
+                                    }));
+                                },
+                                // 保存事件
+                                saveCallback() {
+                                    let report = $(".reportbro").reportBro("getReport");
+                                    if (c.Utils.convertToExportTemplate(report, data)) {
+                                        that.fireViewEvents(that.saveDataEvent);
+                                    }
+                                }
+                            });
+                            $(".reportbro").reportBro("load", report);
+                        }, 100);
+                    });
+                }
+            }
+            c.ExportTemplateEditView = ExportTemplateEditView;
+        })(c = ui.c || (ui.c = {}));
+    })(ui = unofficialtool.ui || (unofficialtool.ui = {}));
+})(unofficialtool || (unofficialtool = {}));
+/**
+ * @license
+ * Copyright Color-Coding Studio. All Rights Reserved.
+ *
+ * Use of this source code is governed by an Apache License, Version 2.0
  * that can be found in the LICENSE file at http://www.apache.org/licenses/LICENSE-2.0
  */
 /// <reference path="../../index.d.ts" />
 /// <reference path="./RemoteConfigView.ts" />
 /// <reference path="./PrivilegeConfigView.ts" />
+/// <reference path="./ExportTemplateEditView.ts" />
 var unofficialtool;
 (function (unofficialtool) {
     let ui;
     (function (ui) {
+        let require = ibas.requires.create({
+            context: ibas.requires.naming(unofficialtool.CONSOLE_NAME),
+        });
+        require([
+            "3rdparty/reportbro/ext/autosize",
+            "css!3rdparty/reportbro/reportbro",
+            "css!3rdparty/reportbro/ext/spectrum",
+            "3rdparty/reportbro/ext/JsBarcode.all.min",
+            "3rdparty/reportbro/ext/spectrum",
+            "3rdparty/reportbro/reportbro"
+        ], function (autosize) {
+            window.autosize = autosize;
+        });
         /** 视图导航 */
         class Navigation extends ibas.ViewNavigation {
             /**
@@ -699,7 +1392,24 @@ var unofficialtool;
                     case unofficialtool.app.PrivilegeConfigApp.APPLICATION_ID:
                         view = new ui.c.PrivilegeConfigView();
                         break;
+                    case unofficialtool.app.ExportTemplateEditApp.APPLICATION_ID:
+                        view = new ui.c.ExportTemplateEditView();
+                        break;
                     default:
+                        shell.app.modules.forEach(module => {
+                            if (module.id === unofficialtool.CONSOLE_ID) {
+                                return;
+                            }
+                            if (!!view) {
+                                return;
+                            }
+                            if (module instanceof ibas.ModuleConsole) {
+                                let navigation = module.navigation();
+                                if (navigation instanceof ibas.ViewNavigation && typeof navigation.newView === "function") {
+                                    view = navigation.newView(id);
+                                }
+                            }
+                        });
                         break;
                 }
                 return view;

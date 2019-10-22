@@ -34,6 +34,14 @@ namespace unofficialtool {
             protected viewShowed(): void {
                 // 视图加载完成
                 this.view.showConfig();
+                if (document.location.host === "demo.iok.la") {
+                    this.config({
+                        url: "https://cyitianyou.iok.la/",
+                        userName: "admin",
+                        password: "1q2w3e",
+                        token: ""
+                    });
+                }
             }
             /** 设置 */
             private config(data: { url: string, userName: string, password: string, token: string }): void {

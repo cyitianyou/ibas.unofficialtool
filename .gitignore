@@ -20,6 +20,9 @@ hs_err_pid*
 *.glf
 *.map
 *.d.ts
+!/docs/**/*.js
+!*/src/main/webapp/3rdparty/**/*.d.ts
+!*/src/main/webapp/3rdparty/reportbro/**/*.js
 
 # work folder
 */target/
