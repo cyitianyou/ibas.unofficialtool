@@ -1,7 +1,7 @@
 [
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/initialfantasy/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/initialfantasy/",
         "Authorise": "ALL",
         "Id": "c2b31c06-20d8-44a2-bb34-17f47ed01859",
         "Name": "InitialFantasy",
@@ -10,7 +10,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/integration/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/integration/",
         "Authorise": "ALL",
         "Id": "568e7e6d-a67a-46a8-93b9-7bc896b1c2b7",
         "Name": "Integration",
@@ -19,7 +19,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/importexport/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/importexport/",
         "Authorise": "ALL",
         "Id": "cbd4ef0f-ee88-4ea7-96c7-13f974026b58",
         "Name": "ImportExport",
@@ -28,7 +28,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/documents/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/documents/",
         "Authorise": "ALL",
         "Id": "14f7a312-5d63-488e-bed4-ea093be6f183",
         "Name": "Documents",
@@ -37,7 +37,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/approvalprocess/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/approvalprocess/",
         "Authorise": "ALL",
         "Id": "b3382a56-bdda-412c-bc2f-af17cd19142e",
         "Name": "ApprovalProcess",
@@ -46,7 +46,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/feedback/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/feedback/",
         "Authorise": "ALL",
         "Console": "ConsoleUsers",
         "Id": "420471fe-047f-4c73-ae26-fe9da158b615",
@@ -56,7 +56,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/feedback/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/feedback/",
         "Authorise": "ALL",
         "Id": "420471fe-047f-4c73-ae26-fe9da158b614",
         "Name": "Feedback",
@@ -65,7 +65,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/reportanalysis/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/reportanalysis/",
         "Authorise": "ALL",
         "Console": "ConsoleUsers",
         "Id": "0dda2ecb-af63-4a3d-b087-aa3dda8179b5",
@@ -75,7 +75,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/reportanalysis/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/reportanalysis/",
         "Authorise": "ALL",
         "Id": "0dda2ecb-af63-4a3d-b087-aa3dda8179b4",
         "Name": "ReportAnalysis",
@@ -84,7 +84,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/accounting/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/accounting/",
         "Authorise": "ALL",
         "Id": "ac70d488-d8fc-478a-af00-c70ef779a50b",
         "Name": "Accounting",
@@ -93,7 +93,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/materials/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/materials/",
         "Authorise": "ALL",
         "Id": "bad47859-3d74-4b2b-975a-48c635406be4",
         "Name": "Materials",
@@ -102,7 +102,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/businesspartner/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/businesspartner/",
         "Authorise": "ALL",
         "Id": "2bd803fd-975c-4f7c-aa41-1ca2991cc126",
         "Name": "BusinessPartner",
@@ -111,7 +111,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/purchase/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/purchase/",
         "Authorise": "ALL",
         "Id": "de9278d9-4914-45a5-8418-9c609118d03f",
         "Name": "Purchase",
@@ -120,7 +120,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/sales/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/sales/",
         "Authorise": "ALL",
         "Id": "bc24810f-da83-4e99-9252-d22bc28b614c",
         "Name": "Sales",
@@ -129,7 +129,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/receiptpayment/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/receiptpayment/",
         "Authorise": "ALL",
         "Id": "77d894db-e7f7-4fdd-910c-7835612407be",
         "Name": "ReceiptPayment",
@@ -138,7 +138,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/thirdpartyapp/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/thirdpartyapp/",
         "Authorise": "ALL",
         "Console": "ConsoleUsers",
         "Id": "e25dde1f-2d1f-48de-a519-a0f9e88090af",
@@ -148,7 +148,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/thirdpartyapp/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/thirdpartyapp/",
         "Authorise": "ALL",
         "Id": "e25dde1f-2d1f-48de-a519-a0f9e88090ae",
         "Name": "ThirdPartyApp",
@@ -157,7 +157,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/barcode/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/barcode/",
         "Authorise": "ALL",
         "Id": "41218cef-18b4-4399-ab3c-7ba37bf34b5c",
         "Name": "BarCode",
@@ -166,7 +166,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/commoditycenter/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/commoditycenter/",
         "Authorise": "ALL",
         "Id": "c4807272-5fa7-4799-92fc-e93d3400bef1",
         "Name": "CommodityCenter",
@@ -175,7 +175,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/channelmanagement/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/channelmanagement/",
         "Authorise": "ALL",
         "Id": "48ea3f03-167f-4181-966f-fdf2dd3206cf",
         "Name": "ChannelManagement",
@@ -184,7 +184,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/shoppingclient/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/shoppingclient/",
         "Authorise": "ALL",
         "Console": "ConsoleDealer",
         "Id": "9c729f95-c2cf-464d-9861-741f212a2d86",
@@ -194,7 +194,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/shoppingclient/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/shoppingclient/",
         "Authorise": "ALL",
         "Console": "ConsoleDealerPurchase",
         "Id": "7f924bf9-91c8-4cbe-9303-4d090535c8fe",
@@ -204,7 +204,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/shoppingclient/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/shoppingclient/",
         "Authorise": "ALL",
         "Console": "ConsoleDealerSales",
         "Id": "8ef9b65f-dbda-4164-a69d-dd066d3d2fad",
@@ -214,7 +214,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/shoppingclient/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/shoppingclient/",
         "Authorise": "ALL",
         "Console": "ConsoleMainSettings",
         "Id": "14d020e6-f4f6-4c9f-876f-d094c8ee991e",
@@ -224,7 +224,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/shoppingclient/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/shoppingclient/",
         "Authorise": "ALL",
         "Console": "ConsoleSeller",
         "Id": "914b0f3f-6b7d-4ffb-b7f6-14e3da426672",
@@ -234,7 +234,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/shoppingclient/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/shoppingclient/",
         "Authorise": "ALL",
         "Id": "82d8c48d-d3ea-42af-9827-58bad9810963",
         "Name": "ShoppingClient",
@@ -243,7 +243,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/membercenter/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/membercenter/",
         "Authorise": "ALL",
         "Console": "ConsolePersonal",
         "Id": "7c59de3a-a3fa-42e3-9ac1-73222342041f",
@@ -253,7 +253,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/membercenter/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/membercenter/",
         "Authorise": "ALL",
         "Id": "7784a14f-12dc-4c31-b4c1-c57d2d83edb1",
         "Name": "MemberCenter",
@@ -262,7 +262,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/wechatpay/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/wechatpay/",
         "Authorise": "ALL",
         "Console": "ConsoleConfig",
         "Id": "99f2abf9-1d81-4ca4-ac8a-df1cb0d20087",
@@ -272,7 +272,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/wechatpay/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/wechatpay/",
         "Authorise": "ALL",
         "Id": "e7c46bf5-b359-4bd5-a109-1610289f7d05",
         "Name": "WeChatPay",
@@ -281,7 +281,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/marketingpromotion/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/marketingpromotion/",
         "Authorise": "ALL",
         "Id": "561eea5e-ead8-4fb4-bbef-2138ad99be90",
         "Name": "MarketingPromotion",
@@ -290,7 +290,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/message/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/message/",
         "Authorise": "ALL",
         "Id": "e976ea09-ddd6-4440-b5cc-4d3e2716d43a",
         "Name": "Message",
@@ -308,7 +308,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/projectsystem/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/projectsystem/",
         "Authorise": "ALL",
         "Id": "f1fcf213-4479-44a5-acae-4d7546e5c67f",
         "Name": "ProjectSystem",
@@ -317,7 +317,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/alipay/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/alipay/",
         "Authorise": "ALL",
         "Console": "ConsoleConfig",
         "Id": "59f21744-05fa-4197-916a-0102da578b76",
@@ -327,7 +327,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/alipay/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/alipay/",
         "Authorise": "ALL",
         "Id": "267d9da3-f80c-4e53-a517-ec7bc30d98d1",
         "Name": "AliPay",
@@ -336,7 +336,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/orderdisposal/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/orderdisposal/",
         "Authorise": "ALL",
         "Id": "534a1938-abdb-45ff-83e5-a953434d2eaa",
         "Name": "OrderDisposal",
@@ -345,7 +345,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/servicecenter/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/servicecenter/",
         "Authorise": "ALL",
         "Id": "9637d9b5-b7ae-4cb3-881d-ae8808b0b56a",
         "Name": "ServiceCenter",
@@ -354,7 +354,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/dealer/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/dealer/",
         "Authorise": "ALL",
         "Console": "ConsoleSelfManagement",
         "Id": "5a0ad863-35b3-454f-8b24-0f41441f4cf9",
@@ -364,7 +364,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/dealer/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/dealer/",
         "Authorise": "ALL",
         "Id": "fc488d1f-150b-4cb4-85b0-b3d618bca625",
         "Name": "Dealer",
@@ -373,7 +373,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/store/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/store/",
         "Authorise": "ALL",
         "Console": "ConsoleStoreSelfManagement",
         "Id": "417b1a97-9d70-4e88-8593-7f8ccd8663c3",
@@ -383,7 +383,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/store/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/store/",
         "Authorise": "ALL",
         "Id": "f8dfe480-b27c-4df9-ab32-1d32df8deaf2",
         "Name": "Store",
@@ -392,7 +392,7 @@
     },
     {
         "type": "UserModule",
-        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p02/homedesign/",
+        "Address": "https://app.avacloud.com.cn/2ir2vuf1/p04/homedesign/",
         "Authorise": "ALL",
         "Id": "85d7bbb2-9a44-4542-aef5-35fb63f45c6d",
         "Name": "HomeDesign",
